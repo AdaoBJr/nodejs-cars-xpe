@@ -8,7 +8,7 @@ const { PORT } = process.env;
 const startServer = () => {
   const app = express();
   app.use(express.json());
-  app.use(router);
+  app.use('/api', router);
 
   app.get('/', (_, response: Response) => {
     response.send('Rota Home');

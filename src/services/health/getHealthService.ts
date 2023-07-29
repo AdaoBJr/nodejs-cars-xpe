@@ -2,7 +2,7 @@ import { HealthRepository } from 'infra';
 import { HttpStatusCode } from 'core/protocols';
 import { HealthMapper } from 'types/dto-mapper';
 
-class GetHealthService {
+export class GetHealthService {
   constructor(private healthRepository: HealthRepository) {}
 
   async execute(): Promise<HealthMapper> {
@@ -16,5 +16,3 @@ class GetHealthService {
     };
   }
 }
-
-export { GetHealthService };
