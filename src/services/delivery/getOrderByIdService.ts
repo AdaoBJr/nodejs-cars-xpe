@@ -1,7 +1,7 @@
 import { apiErrorHandler } from 'core';
+import { OrderDbRepository } from 'infra';
 import { HttpStatusCode } from 'core/protocols';
 import { UpdateOrderMapper } from 'types/dto-mapper';
-import { OrderDbRepository, UpdateOrder } from 'infra';
 
 export class GetOrderByIdService {
   constructor(private orderRepository: OrderDbRepository) {}

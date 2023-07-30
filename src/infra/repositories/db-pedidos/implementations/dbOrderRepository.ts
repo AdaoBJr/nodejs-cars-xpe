@@ -16,7 +16,7 @@ class OrderRepository implements OrderDbRepository {
   }
 
   findOrders(): Order[] {
-    throw new Error('Method not implemented.');
+    return this.dbOrders.pedidos.sort((a, b) => b.id - a.id);
   }
 
   findOrderById(id: number): Order | null {

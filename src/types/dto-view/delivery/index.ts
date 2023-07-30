@@ -3,3 +3,4 @@ export * from './postOrderView';
 export * from './deleteOrderView';
 export * from './getOrderByIdView';
 export * from './getAllOrdersView';
+export * from './getTotalOrdersByClientView';

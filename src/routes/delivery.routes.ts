@@ -6,6 +6,7 @@ import {
   deleteOrderController,
   getOrderByIdController,
   getAllOrdersController,
+  getTotalOrdersByClientController,
 } from 'controllers/delivery';
 
 const deliveryRouter = Router();
@@ -28,6 +29,12 @@ deliveryRouter.post(
 deliveryRouter.put(
   '/atualizar/:id',
   async (request, response) => await putOrderController.handler(request, response)
+);
+
+deliveryRouter.get(
+  '/total/:cliente',
+  async (request, response) =>
+    await getTotalOrdersByClientController.handler(request, response)
 );
 
 deliveryRouter.delete(
