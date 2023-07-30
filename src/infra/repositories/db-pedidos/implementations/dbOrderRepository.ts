@@ -18,9 +18,13 @@ class OrderRepository implements OrderDbRepository {
   findOrders(): Order[] {
     throw new Error('Method not implemented.');
   }
-  findOrderById(id: number): Order {
-    throw new Error('Method not implemented.');
+
+  findOrderById(id: number): Order | null {
+    const currentOrder = getOrderById(id, this.dbOrders);
+    if (!currentOrder) return null;
+    return currentOrder;
   }
+
   createOrder({ cliente, produto, valor }: CreateOrder): Order {
     const avaliableId = getAvaliableId(this.dbOrders);
     const newOrder: Order = {

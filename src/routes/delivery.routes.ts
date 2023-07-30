@@ -4,6 +4,7 @@ import {
   putOrderController,
   postOrderController,
   deleteOrderController,
+  getOrderByIdController,
   getAllOrdersController,
 } from 'controllers/delivery';
 
@@ -12,6 +13,11 @@ const deliveryRouter = Router();
 deliveryRouter.get(
   '/consultar-banco',
   async (request, response) => await getAllOrdersController.handler(request, response)
+);
+
+deliveryRouter.get(
+  '/:id',
+  async (request, response) => await getOrderByIdController.handler(request, response)
 );
 
 deliveryRouter.post(
