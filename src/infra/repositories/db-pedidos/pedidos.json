@@ -1,5 +1,5 @@
 {
-  "nextId": 503,
+  "nextId": 504,
   "pedidos": [
     {
       "id": 1,
@@ -3998,17 +3998,25 @@
       "id": 501,
       "cliente": "Adam1",
       "produto": "Pizza Deliciosa1",
-      "valor": 25,
-      "entregue": false,
-      "timestamp": "2023-07-29T18:27:51.351Z"
+      "valor": 30,
+      "entregue": true,
+      "timestamp": "2023-07-30T03:37:17.995Z"
     },
     {
       "id": 502,
       "cliente": "Adam2",
       "produto": "Pizza Deliciosa2",
+      "valor": 30,
+      "entregue": true,
+      "timestamp": "2023-07-30T03:37:37.627Z"
+    },
+    {
+      "id": 503,
+      "cliente": "Adam3",
+      "produto": "Pizza Deliciosa3",
       "valor": 25,
       "entregue": false,
-      "timestamp": "2023-07-29T18:33:30.110Z"
+      "timestamp": "2023-07-30T03:46:04.910Z"
     }
   ]
 }

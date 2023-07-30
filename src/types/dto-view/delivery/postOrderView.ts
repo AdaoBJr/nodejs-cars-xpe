@@ -1,3 +1,3 @@
 import { Order } from 'types/domain';
 
-export interface OrderView extends Order {}
+export interface CreateOrderView extends Order {}

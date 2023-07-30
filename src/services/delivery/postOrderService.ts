@@ -1,6 +1,6 @@
 import { CreateOrder, OrderDbRepository } from 'infra';
 import { HttpStatusCode } from 'core/protocols';
-import { OrderMapper } from 'types/dto-mapper';
+import { CreateOrderMapper } from 'types/dto-mapper';
 import { apiErrorHandler } from 'core';
 
 export interface ExecuteProps extends CreateOrder {}
@@ -8,7 +8,7 @@ export interface ExecuteProps extends CreateOrder {}
 export class PostOrderService {
   constructor(private orderRepository: OrderDbRepository) {}
 
-  async execute(order: ExecuteProps): Promise<OrderMapper> {
+  async execute(order: ExecuteProps): Promise<CreateOrderMapper> {
     if (!Object.values(order).every((item) => item))
       throw apiErrorHandler({
         throwStatus: 400,

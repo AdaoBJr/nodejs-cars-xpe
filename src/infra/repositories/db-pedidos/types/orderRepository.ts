@@ -7,14 +7,14 @@ export interface CreateOrder {
 }
 
 export interface UpdateOrder extends CreateOrder {
-  id: number;
+  entregue: boolean;
 }
 
 export interface OrderDbRepository {
   consultDBOrders(): DbOrders;
   findOrders(): Order[];
-  findOrderById(id: string): Order;
+  findOrderById(id: number): Order | null;
   createOrder(order: CreateOrder): Order;
-  updateOrder(order: UpdateOrder): Order;
-  deleteOrder(id: string): boolean;
+  updateOrder(id: number, order: UpdateOrder): Order | null;
+  deleteOrder(id: number): boolean | null;
 }

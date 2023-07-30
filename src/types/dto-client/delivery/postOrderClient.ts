@@ -1,7 +1,5 @@
-export interface OrderClient {
-  // body: {
+export interface CreateOrderClient {
   cliente: string;
   produto: string;
   valor: number;
-  // };
 }

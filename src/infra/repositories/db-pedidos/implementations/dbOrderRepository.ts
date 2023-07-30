@@ -8,13 +8,17 @@ class OrderRepository implements OrderDbRepository {
   constructor(private dbOrders: DbOrders, private dbPath: string) {}
 
   consultDBOrders(): DbOrders {
-    return this.dbOrders;
+    const dbOrders = {
+      ...this.dbOrders,
+      pedidos: this.dbOrders.pedidos.sort((a, b) => b.id - a.id),
+    };
+    return dbOrders;
   }
 
   findOrders(): Order[] {
     throw new Error('Method not implemented.');
   }
-  findOrderById(id: string): Order {
+  findOrderById(id: number): Order {
     throw new Error('Method not implemented.');
   }
   createOrder({ cliente, produto, valor }: CreateOrder): Order {
@@ -28,22 +32,48 @@ class OrderRepository implements OrderDbRepository {
       timestamp: new Date().toISOString(),
     };
 
-    const currentDbOrders: DbOrders = {
+    const newDbOrders: DbOrders = {
       nextId: avaliableId + 1,
       pedidos: [...this.dbOrders.pedidos, newOrder],
     };
 
     //salvando no banco
-    fs.writeFile(this.dbPath, JSON.stringify(currentDbOrders), 'utf-8', (err) => {
+    fs.writeFile(this.dbPath, JSON.stringify(newDbOrders), 'utf-8', (err) => {
       if (err) console.error('Erro ao salvar o arquivo:', err);
     });
 
     return newOrder;
   }
-  updateOrder(order: UpdateOrder): Order {
-    throw new Error('Method not implemented.');
+
+  updateOrder(id: number, order: UpdateOrder): Order | null {
+    const currentOrder = this.dbOrders.pedidos.find((order) => order.id === id);
+
+    if (!currentOrder) return null;
+
+    const updatedOrder = {
+      ...currentOrder,
+      ...order,
+    };
+
+    const currentDbOrders = this.dbOrders.pedidos;
+    const removedOldOrder = currentDbOrders.filter((order) => order.id !== id);
+
+    const updatedOrders = [...removedOldOrder, updatedOrder];
+
+    const updatedDbOrders: DbOrders = {
+      nextId: this.dbOrders.nextId,
+      pedidos: updatedOrders.sort((a, b) => a.id - b.id),
+    };
+
+    //salvando no banco
+    fs.writeFile(this.dbPath, JSON.stringify(updatedDbOrders), 'utf-8', (err) => {
+      if (err) console.error('Erro ao salvar o arquivo:', err);
+    });
+
+    return updatedOrder;
   }
-  deleteOrder(id: string): boolean {
+
+  deleteOrder(id: number): boolean {
     throw new Error('Method not implemented.');
   }
 }

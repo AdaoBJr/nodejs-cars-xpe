@@ -8,8 +8,6 @@ export class GetAllOrdersService {
   async execute(): Promise<AllOrdersMapper> {
     const data = this.orderRepository.consultDBOrders();
 
-    //se tiver lógica usar esse local.
-
     return {
       status: HttpStatusCode.ok,
       data,
