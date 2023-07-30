@@ -6,6 +6,7 @@ import { GetOrderByIdService } from './getOrderByIdService';
 import { GetAllOrdersService } from './getAllOrdersService';
 import { GetMoreOrdersService } from './getMoreOrdersService';
 import { GetTotalOrdersByClientService } from './getTotalOrdersByClientService';
+import { GetTotalOrdersByProductService } from './getTotalOrdersByProductService';
 
 const putOrderService = new PutOrderService(orderRepository);
 const postOrderService = new PostOrderService(orderRepository);
@@ -14,6 +15,9 @@ const getOrderByIdService = new GetOrderByIdService(orderRepository);
 const getAllOrdersService = new GetAllOrdersService(orderRepository);
 const getMoreOrdersService = new GetMoreOrdersService(orderRepository);
 const getTotalOrdersByClientService = new GetTotalOrdersByClientService(orderRepository);
+const getTotalOrdersByProductService = new GetTotalOrdersByProductService(
+  orderRepository
+);
 
 export {
   putOrderService,
@@ -23,6 +27,7 @@ export {
   getAllOrdersService,
   getMoreOrdersService,
   getTotalOrdersByClientService,
+  getTotalOrdersByProductService,
   PutOrderService,
   PostOrderService,
   DeleteOrderService,
@@ -30,4 +35,5 @@ export {
   GetAllOrdersService,
   GetMoreOrdersService,
   GetTotalOrdersByClientService,
+  GetTotalOrdersByProductService,
 };

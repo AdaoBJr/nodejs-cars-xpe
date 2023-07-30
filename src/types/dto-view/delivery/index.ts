@@ -5,3 +5,4 @@ export * from './getOrderByIdView';
 export * from './getAllOrdersView';
 export * from './getMoreOrdersView';
 export * from './getTotalOrdersByClientView';
+export * from './getTotalOrdersByProductView';

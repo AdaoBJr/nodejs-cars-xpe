@@ -5,3 +5,4 @@ export * from './getOrderByIdMapper';
 export * from './getAllOrdersMapper';
 export * from './getMoreOrdersMapper';
 export * from './getTotalOrdersByClientMapper';
+export * from './getTotalOrdersByProductMapper';

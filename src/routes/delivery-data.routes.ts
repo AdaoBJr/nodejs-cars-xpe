@@ -5,6 +5,7 @@ import {
   getAllOrdersController,
   getMoreOrdersController,
   getTotalOrdersByClientController,
+  getTotalOrdersByProductController,
 } from 'controllers/delivery';
 
 const deliveryDataRouter = Router();
@@ -23,6 +24,12 @@ deliveryDataRouter.get(
   '/total/cliente/:cliente',
   async (request, response) =>
     await getTotalOrdersByClientController.handler(request, response)
+);
+
+deliveryDataRouter.get(
+  '/total/produto/:produto',
+  async (request, response) =>
+    await getTotalOrdersByProductController.handler(request, response)
 );
 
 deliveryDataRouter.get(
