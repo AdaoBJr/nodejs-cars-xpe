@@ -6,8 +6,8 @@ export interface CreateOrder {
   valor: number;
 }
 
-export interface UpdateOrder extends CreateOrder {
-  entregue: boolean;
+export interface UpdateOrder extends Partial<CreateOrder> {
+  entregue?: boolean;
 }
 
 export interface OrderDbRepository {

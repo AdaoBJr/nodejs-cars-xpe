@@ -11,10 +11,10 @@ export class PutOrderService {
   constructor(private orderRepository: OrderDbRepository) {}
 
   async execute({ id, ...rest }: ExecuteProps): Promise<UpdateOrderMapper> {
-    if (!Object.values({ id, ...rest }).every((item) => item))
+    if (!Object.values({ id }).every((item) => item))
       throw apiErrorHandler({
         throwStatus: 400,
-        messageCustom: 'Dados para atualização do pedido não enviados.',
+        messageCustom: 'Id do pedido não enviado.',
       });
 
     const data = this.orderRepository.updateOrder(id, rest);
