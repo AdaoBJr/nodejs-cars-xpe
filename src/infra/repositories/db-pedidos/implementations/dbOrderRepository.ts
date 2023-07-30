@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-import { getAvaliableId } from 'core';
 import { DbOrders, Order } from 'types/domain';
+import { getOrderById, getAvaliableId, removeOrderById } from 'core';
 import { CreateOrder, OrderDbRepository, UpdateOrder } from '../types';
 
 class OrderRepository implements OrderDbRepository {
@@ -46,8 +46,7 @@ class OrderRepository implements OrderDbRepository {
   }
 
   updateOrder(id: number, order: UpdateOrder): Order | null {
-    const currentOrder = this.dbOrders.pedidos.find((order) => order.id === id);
-
+    const currentOrder = getOrderById(id, this.dbOrders);
     if (!currentOrder) return null;
 
     const updatedOrder = {
@@ -55,14 +54,11 @@ class OrderRepository implements OrderDbRepository {
       ...order,
     };
 
-    const currentDbOrders = this.dbOrders.pedidos;
-    const removedOldOrder = currentDbOrders.filter((order) => order.id !== id);
-
-    const updatedOrders = [...removedOldOrder, updatedOrder];
+    const updatedOrders = [...removeOrderById(id, this.dbOrders.pedidos), updatedOrder];
 
     const updatedDbOrders: DbOrders = {
       nextId: this.dbOrders.nextId,
-      pedidos: updatedOrders.sort((a, b) => a.id - b.id),
+      pedidos: updatedOrders,
     };
 
     //salvando no banco
@@ -73,8 +69,24 @@ class OrderRepository implements OrderDbRepository {
     return updatedOrder;
   }
 
-  deleteOrder(id: number): boolean {
-    throw new Error('Method not implemented.');
+  deleteOrder(id: number): boolean | null {
+    const currentOrder = getOrderById(id, this.dbOrders);
+    if (!currentOrder) return null;
+
+    const removedDbOrders: DbOrders = {
+      nextId: this.dbOrders.nextId - 1,
+      pedidos: removeOrderById(id, this.dbOrders.pedidos),
+    };
+
+    //salvando no banco
+    fs.writeFile(this.dbPath, JSON.stringify(removedDbOrders), 'utf-8', (err) => {
+      if (err) {
+        console.error('Erro ao salvar o arquivo:', err);
+        return false;
+      }
+    });
+
+    return !!removedDbOrders;
   }
 }
 

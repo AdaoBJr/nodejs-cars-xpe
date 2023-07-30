@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
 import {
-  getAllOrdersController,
   putOrderController,
   postOrderController,
+  deleteOrderController,
+  getAllOrdersController,
 } from 'controllers/delivery';
 
 const deliveryRouter = Router();
@@ -21,6 +22,11 @@ deliveryRouter.post(
 deliveryRouter.put(
   '/atualizar/:id',
   async (request, response) => await putOrderController.handler(request, response)
+);
+
+deliveryRouter.delete(
+  '/deletar/:id',
+  async (request, response) => await deleteOrderController.handler(request, response)
 );
 
 export { deliveryRouter };

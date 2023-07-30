@@ -13,8 +13,6 @@ export class PutOrderController {
     req: Request<any, UpdateOrderClient>,
     res: Response<UpdateOrderView | ApiError>
   ) {
-    console.log({ id: req.params.id, body: req.body });
-
     try {
       const response = await this.putOrderService.execute({
         id: Number(req.params.id),
